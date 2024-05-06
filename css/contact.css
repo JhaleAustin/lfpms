@@ -1,0 +1,57 @@
+/* Reset default margin and padding */
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: #FDEFCA; /* Set the background color for the whole screen */
+}
+
+/* Style for the navigation bar */
+.navbar {
+    background-color: rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+/* Style for each navigation item */
+.nav-item {
+    float: right;
+    display: block;
+    color: #333; /* Text color */
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 18px;
+    transition: background-color 0.3s, color 0.3s; /* Add transition effect */
+}
+.nav-item {
+    padding-left: 18px; /* Adjust as needed */
+}
+
+
+/* Add a hover effect */
+.nav-item:hover {
+    background-color: #45a049;
+    border-radius: 25px 50px; /* Set horizontal and vertical radius for an oval shape */
+}
+.active {
+    background-color: #4CAF50;
+    color: #fff;
+    border-radius: 50% / 50%; /* Adjust the border-radius to make it wider */
+    padding: 8px 20px; /* Adjust padding as needed */
+    display: inline-block; /* Ensure the element takes the width of its content */
+    line-height: 50px;
+}
+#contact.active {
+    margin-right: 10px; /* Adjust the margin as needed */
+}
+
+/* Style for the main content */
+.content {
+    margin-top: 60px; /* Adjust the margin to make space for the fixed navbar */
+    padding: 20px;
+}
+
+/* Slide-in effect for navigation items */
+.nav-item.slide-in {
+    margin-right: 0;
+}
+
