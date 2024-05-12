@@ -19,7 +19,67 @@
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
+<style>
 
+.container4 {
+    position: relative;
+    width: 1100px;
+    display: flex;
+    align-items: row-reverse;
+    flex-wrap: wrap;
+    padding: 10;
+   margin: 4% auto 0; }
+
+
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown button */
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+
+</style>
 </head>
 <body>
 
@@ -55,8 +115,82 @@
 </br>
 
 
-<div>
+<div>  
 
+    <div class="container4" >
+  
+    <div class="dropdown">
+    <form method="post" action="">
+    <select name="district" class="dropbtn" id="district-select" onchange="this.form.submit()">
+        <option value="">Select District</option>
+        <div class="dropdown-content">
+ <?php
+$select_products = $conn->prepare("SELECT * FROM users WHERE usertype=2");
+$select_products->execute();
+
+if ($select_products->execute()) {
+    $result = $select_products->get_result();
+    if ($result->num_rows > 0) {
+        while ($fetch_products = $result->fetch_assoc()) { 
+          echo '<option class="district-link" value="' . $fetch_products['district'] . '">' . $fetch_products['district'] . '</option>';
+            }}}
+        ?>
+    </select>
+</form>
+    
+ 
+
+<?php
+// PHP variable to store the selected value
+$store = "";
+
+// Check if form is submitted and get selected district
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['district'])) {
+        $store = $_POST['district'];
+    }
+}
+?>
+
+        </div>
+    </div>
+
+
+</div>
+
+
+<?php
+$select_products = $conn->prepare("SELECT * FROM `users` where district = ?");
+$select_products->bind_param("s", $store);
+if ($select_products->execute()) {
+    $result = $select_products->get_result();
+    if ($result->num_rows > 0) {
+        while ($fetch_products = $result->fetch_assoc()) { 
+?>
+
+
+<div class="container">
+  
+    <div class="imgBx">
+        <img src="../pages/uploaded_img/mango.png" alt="Nike Jordan Proto-Lyte Image">
+    </div>
+    <div class="details">
+        <div class="content">
+            <h2><?= $fetch_products['fullname']; ?><br>
+                <!-- <span>Running Collection</span> -->
+            </h2>
+            <p>Literary texts are texts that use language creatively to express ideas, emotions, and stories123.Some types of literary texts and examples are123:
+Lyrical texts: poems that express emotions and feelings, such as "An Idle Fellow" by Kate Chopin.
+Narrative texts: stories that tell events and actions, such as fairy tales, mysteries, science fiction, etc. For example, "An Imperial Message" by Franz Kafka.
+Theatrical or dramatic texts: texts that are written for performance, such as plays, scripts, dialogues, etc.
+Didactic or essay texts: texts that aim to inform, persuade, or teach, such as articles, reports, reviews, etc.</p>   
+             
+        </div>
+    </div>
+</div>
+        <?php
+        }}}
+   ?>
 <?php
 $select_products = $conn->prepare("SELECT * FROM `products`");
 if ($select_products->execute()) {
@@ -66,7 +200,7 @@ if ($select_products->execute()) {
 ?>
 
 
-<a href="./foods.php?id=<?= $_SESSION['id'] ?>">  
+<a href="./foods.php?id=<?= $fetch_products['product_id'] ?>">  
      
      <div class="container">
         <div class="imgBx">

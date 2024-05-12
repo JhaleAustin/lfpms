@@ -1,57 +1,55 @@
-<?php
-    session_start();
-    if(isset($_SESSION['id']) && $_SESSION['usertype'] == 0){
-        header("Location: pages/home/");
-    }
-    else if(isset($_SESSION['id']) && $_SESSION['usertype'] == 1){
-        header("Location: pages/home/");
-    }
-    else if(isset($_SESSION['id']) && $_SESSION['usertype'] == 2){
-        header("Location: pages/home/");
-    }
-    else
-    {
-        session_destroy();
-?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Login Page</title>
-</head>
+    <link rel="stylesheet" href="css/home.css">
+    <title>Foodtrack Home</title>
 
-<body>
-    <div class="Log-in">
-		<img src="img/foodtrack.png" alt="" width="250" height="100">
-        <form method="POST" action="pages/login.php">
-            <div class="input-container">
-                <input type="text" class="Username" name="username" id="username" placeholder="Username" />
-            </div>
-            <div class="input-container">
-                <input type="password" class="Password" name="password" id="password" placeholder="Password" />
-            </div>
-            <div class="remember-me">
-                <input type="checkbox" id="rememberMeCheckbox">
-                <label for="rememberMeCheckbox">Remember Me</label>
-            </div>
-            <div class="box6">
-                <button name="submit" id="submit">Sign In</button>
-            </div>
-        </form>
-			</br>
-            <label>Don't have an account yet?</label>
-            <div class="box6">
-                <button onclick="redirectToSignUp()">Sign Up</button>
-            </div>
-    </div>
+    <style>
+        .hero2 {
+            width: 100%;
+            min-height: 100vh;
+            background: url('img/home.png') center center no-repeat;
+            background-size:cover;
+            color: #525252;
 
-    <script src="js/script.js"></script>
-</body>
-
-</html>
-<?php
+        }
+ 
+    ul {
+        list-style-type: none;
+        padding: 0;
     }
-?>
+    li {
+        margin-bottom: 10px;
+    }
+    li a {
+        text-decoration: none;
+        color: #000000; /* Black text */
+        font-weight: bold;
+    }
+    </style>
+</head>
+<body>
+  
+<div class="hero2">
+  <nav>
+    <img src="img/foodtrack.png" class="Foodtrack">
+    <ul>
+	<li><a href="./">Home</a></li>
+      <li><a href="pages/about.php">About</a></li>
+      <li><a href="pages/contact.php">Contact Us</a></li>
+     <li><a href="login.php"  >Login</a></li>
+  
+    </ul>
+	  
+ 
+      
+  </nav>
+</div>
+  
+<script src="../../js/script.js"></script>
+</body>
+</html>
+

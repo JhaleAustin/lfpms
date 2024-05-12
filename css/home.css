@@ -12,6 +12,16 @@
     color: #525252;
 }
 
+
+.hero {
+    width: 100%;
+    min-height: 100vh;
+    background: url('../img/home.png') center center no-repeat;
+    background-size: cover;
+    color: #525252;
+}
+
+
 nav {
     background-color: #1a1a1a;
     width: 100%;

@@ -1,7 +1,7 @@
 // Sign up button in index.php redirecting to signuo.php
-function redirectToSignUp() {
-  window.location.href = "pages/signup.php"; 
-}
+// function redirectToSignUp() {
+//   window.location.href = "signup.php"; 
+// }
 
 // MSME button in signup.php redirecting to msme.php
 function redirectToMSME() {

@@ -17,14 +17,14 @@
         if (empty($username)) {
             echo "<script>
                 alert('Username is required!');
-                window.location.href='../';
+                window.location.href='../login.php';
             </script>";
     
             exit();
         }else if(empty($password)){
             echo "<script>
                 alert('Password is required!');
-                window.location.href='../';
+                window.location.href='../login.php';
             </script>";
     
             exit();
@@ -48,7 +48,7 @@
                 }else{
                     echo "<script>
                         alert('Incorrect username or password!');
-                        window.location.href='../';
+                        window.location.href='../login.php';
                     </script>";
 
                     exit();

@@ -19,7 +19,7 @@
     {
         echo "<script>
                 alert('Registration is successful! You can now login.');
-                window.location.href='../';
+                window.location.href='../login.php';
             </script>";
     }
   

@@ -138,7 +138,7 @@
 
 <div class="box-container">
 <?php
-$select_products = $conn->prepare("SELECT * FROM `products`");
+$select_products = $conn->prepare("SELECT * FROM `products` where msme_id=".$_SESSION['id']);
 if ($select_products->execute()) {
     $result = $select_products->get_result();
     if ($result->num_rows > 0) {

@@ -139,7 +139,7 @@ nav ul li a.active {
   width: calc(100% - 20px);
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+ justify-content: space-between;
   padding: 0 10px;
   margin: 8% auto 0;
 }
