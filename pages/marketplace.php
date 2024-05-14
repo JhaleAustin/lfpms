@@ -6,6 +6,7 @@
         
     include "../includes/dbcon.php";
 
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -78,7 +79,38 @@
 .dropdown:hover .dropbtn {
     background-color: #3e8e41;
 }
+.dropdown {
+            position: relative;
+            display: inline-block;
+        }
 
+        .dropdown-content, .submenu-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a, .submenu-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover, .submenu-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .dropdown-submenu {
+            position: relative;
+        }
 </style>
 </head>
 <body>
@@ -89,7 +121,52 @@
         <ul>
             <li><a href="home/">Home</a></li>
             <li><a href="about.php">About</a></li>
-            <li><a href="marketplace.php">Products</a></li>
+            <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn" onclick="toggleDropdown()">Districts</a>
+            <div id="districtDropdown" class="dropdown-content">
+                <a href="javascript:void(0)" onclick="toggleSubmenu('district1')">District 1</a>
+                <div id="district1" class="submenu-content">
+                    <a href="marketplace.php?location=Guimbal">Guimbal</a>
+                    <a href="marketplace.php?location=Igbaras">Igbaras</a>
+                    <a href="marketplace.php?location=Miagao">Miagao</a>
+                    <a href="marketplace.php?location=Oton">Oton</a>
+                    <a href="marketplace.php?location=San Joaquin">San Joaquin</a>
+                    <a href="marketplace.php?location=Tigbauan">Tigbauan</a>
+                    <a href="marketplace.php?location=Tubungan">Tubungan</a>
+                </div>
+                <a href="javascript:void(0)" onclick="toggleSubmenu('district2')">District 2</a>
+                <div id="district2" class="submenu-content">
+                    <a href="#">Location 1</a>
+                    <a href="#">Location 2</a>
+                    <!-- Add more locations as needed -->
+                </div>
+                <a href="javascript:void(0)" onclick="toggleSubmenu('district3')">District 3</a>
+                <div id="district3" class="submenu-content">
+                    <a href="#">Location 1</a>
+                    <a href="#">Location 2</a>
+                    <!-- Add more locations as needed -->
+                </div>
+                <a href="javascript:void(0)" onclick="toggleSubmenu('district4')">District 4</a>
+                <div id="district4" class="submenu-content">
+                    <a href="#">Location 1</a>
+                    <a href="#">Location 2</a>
+                    <!-- Add more locations as needed -->
+                </div>
+                <a href="javascript:void(0)" onclick="toggleSubmenu('district5')">District 5</a>
+                <div id="district5" class="submenu-content">
+                    <a href="#">Location 1</a>
+                    <a href="#">Location 2</a>
+                    <!-- Add more locations as needed -->
+                </div>
+                <a href="javascript:void(0)" onclick="toggleSubmenu('district6')">District 6</a>
+                <div id="district6" class="submenu-content">
+                    <a href="#">Location 1</a>
+                    <a href="#">Location 2</a>
+                    <!-- Add more locations as needed -->
+                </div>
+            </div>
+        </li>
+        <li><a href="marketplace.php">Products</a></li>
             <li><a href="Dashbord.php">Dashboard</a></li>
             <li><a href="contact.php">Contact Us</a></li>
         </ul>
@@ -192,6 +269,81 @@ Didactic or essay texts: texts that aim to inform, persuade, or teach, such as a
         }}}
    ?>
 <?php
+
+//$select_products = $conn->prepare("SELECT * FROM `products` where district=".$_GET['Guimbal']);
+   
+if (isset($_GET['location'])){
+
+   // $select_products = $conn->prepare("SELECT * FROM `users` where district=".$_GET['Guimbal']);
+  
+  
+    $district = $_GET['location'];
+
+    // Prepare and execute the query to get the user ID based on the district
+    $select_user_id = $conn->prepare("SELECT userid FROM users WHERE district = ?");
+    $select_user_id->bind_param("s", $district); // Assuming district is a string
+    $select_user_id->execute();
+    $result = $select_user_id->get_result();
+
+    // Fetch the user ID
+    $row = $result->fetch_assoc();
+    $user_id = $row['userid'];
+
+    // Free the result and close the statement
+    $result->free();
+    $select_user_id->close();
+
+    // Now, you have the user ID, you can use it to query for products associated with that user
+    // Prepare and execute the query to select all products where msme_id equals user_id
+    $select_products = $conn->prepare("SELECT * FROM products WHERE msme_id = ?");
+    $select_products->bind_param("i", $user_id); // Assuming user_id is an integer
+
+
+
+    if ($select_products->execute()) {
+        $result = $select_products->get_result();
+        if ($result->num_rows > 0) {
+            while ($fetch_products = $result->fetch_assoc()) { 
+    ?>
+    
+    
+    <a href="./foods.php?id=<?= $fetch_products['product_id'] ?>">  
+         
+         <div class="container">
+            <div class="imgBx">
+                 <img src="../pages/uploaded_img/<?= $fetch_products['productImage'];?>" alt="Nike Jordan Proto-Lyte Image">
+             </div>
+             <div class="details">
+                 <div class="content">
+                     <h2><?= $fetch_products['productName']; ?><br>
+                         <!-- <span>Running Collection</span> -->
+                     </h2>
+                     <p>
+                     <?= $fetch_products['productDetails']; ?></p>   
+                     <h3>₱<span><?= $fetch_products['productPrice']; ?></h3>
+                     <button>Comment</button>
+                 </div>
+             </div>
+            
+         </div>
+      </a> 
+    
+    
+      <?php
+    
+            }
+        } else {
+            echo '<p class="empty">No products added yet!</p>';
+        }
+    } else {
+        // Error occurred
+        $errorInfo = $select_products->error;
+        echo 'Error: ' . $errorInfo;
+    }
+
+
+}else{
+
 $select_products = $conn->prepare("SELECT * FROM `products`");
 if ($select_products->execute()) {
     $result = $select_products->get_result();
@@ -223,6 +375,7 @@ if ($select_products->execute()) {
 
 
   <?php
+
         }
     } else {
         echo '<p class="empty">No products added yet!</p>';
@@ -232,13 +385,25 @@ if ($select_products->execute()) {
     $errorInfo = $select_products->error;
     echo 'Error: ' . $errorInfo;
 }
+
+}
 ?>
 </div>
 
 
 </div>
 <script src="../js/script.js"></script>
-   
+<script>
+    function toggleDropdown() {
+        var districtDropdown = document.getElementById("districtDropdown");
+        districtDropdown.classList.toggle("show");
+    }
+
+    function toggleSubmenu(districtId) {
+        var submenu = document.getElementById(districtId);
+        submenu.classList.toggle("show");
+    }
+</script>
 </body>
 </html>
 <?php

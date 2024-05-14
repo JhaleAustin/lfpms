@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
- 
+
 h1 {
 	font-weight: bold;
 	margin: 0;
@@ -31,8 +31,8 @@ a {
 
 button {
 	border-radius: 20px;
-	border: 1px solid #FF4B2B;
-	background-color: #FF4B2B;
+	border: 1px solid #343333;
+	background-color: #2ba7ff;
 	color: #FFFFFF;
 	font-size: 12px;
 	font-weight: bold;
@@ -81,9 +81,10 @@ input {
 			0 10px 10px rgba(0,0,0,0.22);
 	position: relative;
 	overflow: hidden;
-	width: 768px;
+	width: 868px;
 	max-width: 100%;
 	min-height: 480px;
+	margin-top:50px;
 }
 
 .form-container {
@@ -132,7 +133,7 @@ input {
 .overlay-container {
 	position: absolute;
 	top: 0;
-	left: 30%;
+	left: 50%;
 	width: 50%;
 	height: 100%;
 	overflow: hidden;
@@ -145,9 +146,9 @@ input {
 }
 
 .overlay {
-	background: #000000;
-	background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-	background: linear-gradient(to right, #FF4B2B, #FF416C);
+	background: #274957;
+	background: -webkit-linear-gradient(to right, #274957, #274957);
+	background: linear-gradient(to right, #274957, #274957);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;
@@ -210,28 +211,4 @@ input {
 	height: 40px;
 	width: 40px;
 }
-
-footer {
-    background-color: #222;
-    color: #fff;
-    font-size: 14px;
-    bottom: 0;
-    position: fixed;
-    left: 0;
-    right: 0;
-    text-align: center;
-    z-index: 999;
-}
-
-footer p {
-    margin: 10px 0;
-}
-
-footer i {
-    color: red;
-}
-
-footer a {
-    color: #3c97bf;
-    text-decoration: none;
-}
+ 
