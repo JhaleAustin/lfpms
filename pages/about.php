@@ -159,7 +159,7 @@
         .hero2 {
             width: 100%;
             min-height: 100vh;
-            background: url('../img/home.png') center center no-repeat;
+            background: url('../img/about.png') center center no-repeat;
             background-size:cover;
             color: #525252;
 
