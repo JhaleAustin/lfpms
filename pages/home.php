@@ -19,8 +19,7 @@
             <li><a href="home/">Home</a></li>
             <li><a href="about.php">About</a></li>
             <li><a href="marketplace.php">Products</a></li>
-            <li><a href="Dashboard.php">Dashboard</a></li>
-            <li><a href="contact.php">Contact Us</a></li>
+             <li><a href="contact.php">Contact Us</a></li>
         </ul>
         <img src="profile.png" class="user" id="userIcon">
         <div class="sub-menu-warp" id="subMenu">
@@ -30,6 +29,8 @@
                     <h2><?php echo $_SESSION['fullname']; ?></h2>
                 </a></div>
                 <hr>
+        <a href="../Dashboard.php" class="sub-menu-link">Dashboard</a>
+          <hr>
                 <a href="#" class="sub-menu-link">
                     <img src="profile.png">
                     <p>Edit Profile</p>

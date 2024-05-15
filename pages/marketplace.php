@@ -167,7 +167,6 @@
             </div>
         </li>
         <li><a href="marketplace.php">Products</a></li>
-            <li><a href="Dashbord.php">Dashboard</a></li>
             <li><a href="contact.php">Contact Us</a></li>
         </ul>
         <img src="../img/profile.png" class="user" id="userIcon">
@@ -178,6 +177,8 @@
                     <h2><?php echo $_SESSION['fullname']; ?></h2>
                 </div>
                 <hr>
+        <a href="../Dashboard.php" class="sub-menu-link">Dashboard</a>
+        <hr>
                 <a href="logout.php" class="sub-menu-link">
                     <img src="../img/profile.png">
                     <p>Log out</p>
