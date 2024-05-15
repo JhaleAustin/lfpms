@@ -7,8 +7,7 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $fullname = $_POST['fullname'];
     $username = $_POST['username'];
-    $phone = $_POST['phone'];
-    $pass = $_POST['password'];
+      $pass = $_POST['password'];
 
     // Prepare an SQL statement to prevent SQL injection
     $stmt = $conn->prepare("INSERT INTO users (email, fullname, username, password, usertype) VALUES (?, ?, ?, ?, 2)");
@@ -43,6 +42,14 @@ if (isset($_POST['submit'])) {
             return ['uploaded' => null, 'errors' => $errors];
         }
 
+
+        function handleUploadResult($uploadResult, &$errors) {
+            if (!empty($uploadResult['errors'])) {
+                $errors = array_merge($errors, $uploadResult['errors']);
+            }
+            return $uploadResult;
+        }
+        
         $nameofbusiness = $_POST['nameofbusiness'];
         $businessAddress = $_POST['businessAddress'];
         $typeofbusiness = $_POST['typeofbusiness'];
@@ -50,22 +57,56 @@ if (isset($_POST['submit'])) {
         $tin = $_POST['tin'];
 
         // Handle file uploads
-        function handleUpload($fileInputName, $uploadDir, &$errors) {
-            if (isset($_FILES[$fileInputName])) {
-                $uploadResult = uploadFile($_FILES[$fileInputName], $uploadDir);
-                if (!empty($uploadResult['uploaded'])) {
-                    return $uploadResult['uploaded'];
-                } else {
-                    $errors = array_merge($errors, $uploadResult['errors']);
-                }
-            }
-            return null;
-        }
+      
+        $BLcenseFile = $_FILES['bl'];
+$BLcenseFilename = $BLcenseFile["name"]; // Initialize filename
+if (!empty($BLcenseFile)) {
+    $uploadResult = uploadFile($BLcenseFile, $uploadDir);
+    $uploadResult = handleUploadResult($uploadResult, $errors);
+    if (!empty($uploadResult['uploaded'])) {
+        $BLcenseFilename = $uploadResult['uploaded'];
+    }
+}
 
-        $BLcense = handleUpload('bl', $uploadDir, $errors);
-        $TDocuments = handleUpload('td', $uploadDir, $errors);
-        $BPermit = handleUpload('bp', $uploadDir, $errors);
+$tdFile = $_FILES['td'];
+$tdFilename = $tdFile["name"]; // Initialize filename
+if (!empty($tdFile)) {
+    $uploadResult = uploadFile($tdFile, $uploadDir);
+    $uploadResult = handleUploadResult($uploadResult, $errors);
+    if (!empty($uploadResult['uploaded'])) {
+        $tdFilename = $uploadResult['uploaded'];
+    }
+}
 
+$bpFile = $_FILES['bp'];
+$bpFilename = $bpFile["name"]; // Initialize filename
+if (!empty($bpFile)) {
+    $uploadResult = uploadFile($bpFile, $uploadDir);
+    $uploadResult = handleUploadResult($uploadResult, $errors);
+    if (!empty($uploadResult['uploaded'])) {
+        $bpFilename = $uploadResult['uploaded'];
+    }
+}
+        // $BLcense = handleUpload('bl', $uploadDir, $errors);
+        // $TDocuments = handleUpload('td', $uploadDir, $errors);
+        // $BPermit = handleUpload('bp', $uploadDir, $errors);
+        // function handleUpload($fileInputName, $uploadDir, &$errors) {
+        //     if (isset($_FILES[$fileInputName])) {
+        //         $uploadResult = uploadFile($_FILES[$fileInputName], $uploadDir);
+        //         if (!empty($uploadResult['uploaded'])) {
+        //             return $uploadResult['uploaded'];
+        //         } else {
+        //             $errors = array_merge($errors, $uploadResult['errors']);
+        //         }
+        //     }
+        //     return null;
+        // }
+
+    
+
+$BLcense = $BLcenseFilename;
+$TDocuments = $tdFilename;
+$BPermit = $bpFilename;
         // Insert business information into the database
         $stmt = $conn->prepare("INSERT INTO business_information (userid, NBusiness, BusinessAddress, TypeBusiness, brn, BLcense, TDocuments, BPermit) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("isssssss", $id, $nameofbusiness, $businessAddress, $typeofbusiness, $bnr, $BLcense, $TDocuments, $BPermit);
