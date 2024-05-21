@@ -132,42 +132,65 @@
             <div id="districtDropdown" class="dropdown-content">
                 <a href="javascript:void(0)" onclick="toggleSubmenu('district1')">District 1</a>
                 <div id="district1" class="submenu-content">
-                    <a href="marketplace.php?location=Guimbal">Guimbal</a>
-                    <a href="marketplace.php?location=Igbaras">Igbaras</a>
-                    <a href="marketplace.php?location=Miagao">Miagao</a>
-                    <a href="marketplace.php?location=Oton">Oton</a>
-                    <a href="marketplace.php?location=San Joaquin">San Joaquin</a>
-                    <a href="marketplace.php?location=Tigbauan">Tigbauan</a>
-                    <a href="marketplace.php?location=Tubungan">Tubungan</a>
+                    <a href="marketplace.php?location=Guimbal">Oton</a>
+                    <a href="marketplace.php?location=Igbaras">Tigbauan</a>
+                    <a href="marketplace.php?location=Miagao">Guimbal</a>
+                    <a href="marketplace.php?location=Oton">Tubungan</a>
+                    <a href="marketplace.php?location=San Joaquin">Igbaras</a>
+                    <a href="marketplace.php?location=Tigbauan">Miagao</a>
+                    <a href="marketplace.php?location=Tubungan">San Joaquin</a>
                 </div>
                 <a href="javascript:void(0)" onclick="toggleSubmenu('district2')">District 2</a>
                 <div id="district2" class="submenu-content">
-                    <a href="#">Location 1</a>
-                    <a href="#">Location 2</a>
-                    <!-- Add more locations as needed -->
+                    <a href="#">Alimodian</a>
+                    <a href="#">Pavia</a>
+                    <a href="#">Leganes</a>
+                    <a href="#">Zarraga</a>
+                    <a href="#">Leon</a>
+                    <a href="#">Sta. Barbara</a>
+                    <a href="#">New Lucena</a>
+                    <a href="#">New Lucena</a>
                 </div>
                 <a href="javascript:void(0)" onclick="toggleSubmenu('district3')">District 3</a>
                 <div id="district3" class="submenu-content">
-                    <a href="#">Location 1</a>
-                    <a href="#">Location 2</a>
-                    <!-- Add more locations as needed -->
+                    <a href="#">Cabatuan</a>
+                    <a href="#">Pototan</a>
+                    <a href="#">Maasin</a>
+                    <a href="#">Lambunao</a>
+                    <a href="#">Calinog</a>
+                    <a href="#">Badiangan</a>
+                    <a href="#">Bingawan</a>
+                    <a href="#">Mina</a>
+                    <a href="#">Janiuay</a>
                 </div>
                 <a href="javascript:void(0)" onclick="toggleSubmenu('district4')">District 4</a>
                 <div id="district4" class="submenu-content">
-                    <a href="#">Location 1</a>
-                    <a href="#">Location 2</a>
+                    <a href="#">Passi City</a>
+                    <a href="#">Dingle</a>
+                    <a href="#">Banate</a>
+                    <a href="#">Anilao</a>
+                    <a href="#">Barotac Nuevo</a>
+                    <a href="#">Dumangas</a>
+                    <a href="#">Dueñas</a>
                     <!-- Add more locations as needed -->
                 </div>
                 <a href="javascript:void(0)" onclick="toggleSubmenu('district5')">District 5</a>
                 <div id="district5" class="submenu-content">
-                    <a href="#">Location 1</a>
-                    <a href="#">Location 2</a>
-                    <!-- Add more locations as needed -->
+                    <a href="#">Estancia</a>
+                    <a href="#">Barotac Viejo</a>
+                    <a href="#">Ajuy</a>
+                    <a href="#">Concepcion</a>
+                    <a href="#">Sara</a>
+                    <a href="#">San Dionisio</a>
+                    <a href="#">Balasan </a>
+                    <a href="#">Batad</a>
+                    <a href="#">Carles</a>
+                    <a href="#">Lemery </a>
+                    <a href="#">San Rafael</a>
                 </div>
-                <a href="javascript:void(0)" onclick="toggleSubmenu('district6')">District 6</a>
+                <a href="javascript:void(0)" onclick="toggleSubmenu('district6')">Lone District</a>
                 <div id="district6" class="submenu-content">
-                    <a href="#">Location 1</a>
-                    <a href="#">Location 2</a>
+                    <a href="#">Iloilo City</a>
                     <!-- Add more locations as needed -->
                 </div>
             </div>

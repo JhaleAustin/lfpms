@@ -354,6 +354,13 @@
   }
   else if(isset($_SESSION['id']) && $_SESSION['usertype'] == 1 || isset($_SESSION['id']) && $_SESSION['usertype'] == 2){
 ?>
+
+<?php
+     
+    include "../../includes/dbcon.php";
+ 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -362,11 +369,17 @@
     <link rel="stylesheet" href="../../css/home.css">
     <title>Foodtrack Home</title>
 
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+     <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="../../css/style_2.css">
+
     <style>
         .hero2 {
             width: 100%;
             min-height: 100vh;
-            background: url('../../img/home.png') center center no-repeat;
             background-size:cover;
             color: #525252;
         }
@@ -419,42 +432,65 @@
             <div id="districtDropdown" class="dropdown-content">
                 <a href="javascript:void(0)" onclick="toggleSubmenu('district1')">District 1</a>
                 <div id="district1" class="submenu-content">
-                    <a href="marketplace.php?location=Guimbal">Guimbal</a>
-                    <a href="marketplace.php?location=Igbaras">Igbaras</a>
-                    <a href="marketplace.php?location=Miagao">Miagao</a>
-                    <a href="marketplace.php?location=Oton">Oton</a>
-                    <a href="marketplace.php?location=San Joaquin">San Joaquin</a>
-                    <a href="marketplace.php?location=Tigbauan">Tigbauan</a>
-                    <a href="marketplace.php?location=Tubungan">Tubungan</a>
+                    <a href="marketplace.php?location=Guimbal">Oton</a>
+                    <a href="marketplace.php?location=Igbaras">Tigbauan</a>
+                    <a href="marketplace.php?location=Miagao">Guimbal</a>
+                    <a href="marketplace.php?location=Oton">Tubungan</a>
+                    <a href="marketplace.php?location=San Joaquin">Igbaras</a>
+                    <a href="marketplace.php?location=Tigbauan">Miagao</a>
+                    <a href="marketplace.php?location=Tubungan">San Joaquin</a>
                 </div>
                 <a href="javascript:void(0)" onclick="toggleSubmenu('district2')">District 2</a>
                 <div id="district2" class="submenu-content">
-                    <a href="#">Location 1</a>
-                    <a href="#">Location 2</a>
-                    <!-- Add more locations as needed -->
+                    <a href="#">Alimodian</a>
+                    <a href="#">Pavia</a>
+                    <a href="#">Leganes</a>
+                    <a href="#">Zarraga</a>
+                    <a href="#">Leon</a>
+                    <a href="#">Sta. Barbara</a>
+                    <a href="#">New Lucena</a>
+                    <a href="#">New Lucena</a>
                 </div>
                 <a href="javascript:void(0)" onclick="toggleSubmenu('district3')">District 3</a>
                 <div id="district3" class="submenu-content">
-                    <a href="#">Location 1</a>
-                    <a href="#">Location 2</a>
-                    <!-- Add more locations as needed -->
+                    <a href="#">Cabatuan</a>
+                    <a href="#">Pototan</a>
+                    <a href="#">Maasin</a>
+                    <a href="#">Lambunao</a>
+                    <a href="#">Calinog</a>
+                    <a href="#">Badiangan</a>
+                    <a href="#">Bingawan</a>
+                    <a href="#">Mina</a>
+                    <a href="#">Janiuay</a>
                 </div>
                 <a href="javascript:void(0)" onclick="toggleSubmenu('district4')">District 4</a>
                 <div id="district4" class="submenu-content">
-                    <a href="#">Location 1</a>
-                    <a href="#">Location 2</a>
+                    <a href="#">Passi City</a>
+                    <a href="#">Dingle</a>
+                    <a href="#">Banate</a>
+                    <a href="#">Anilao</a>
+                    <a href="#">Barotac Nuevo</a>
+                    <a href="#">Dumangas</a>
+                    <a href="#">Dueñas</a>
                     <!-- Add more locations as needed -->
                 </div>
                 <a href="javascript:void(0)" onclick="toggleSubmenu('district5')">District 5</a>
                 <div id="district5" class="submenu-content">
-                    <a href="#">Location 1</a>
-                    <a href="#">Location 2</a>
-                    <!-- Add more locations as needed -->
+                    <a href="#">Estancia</a>
+                    <a href="#">Barotac Viejo</a>
+                    <a href="#">Ajuy</a>
+                    <a href="#">Concepcion</a>
+                    <a href="#">Sara</a>
+                    <a href="#">San Dionisio</a>
+                    <a href="#">Balasan </a>
+                    <a href="#">Batad</a>
+                    <a href="#">Carles</a>
+                    <a href="#">Lemery </a>
+                    <a href="#">San Rafael</a>
                 </div>
-                <a href="javascript:void(0)" onclick="toggleSubmenu('district6')">District 6</a>
+                <a href="javascript:void(0)" onclick="toggleSubmenu('district6')">Lone District</a>
                 <div id="district6" class="submenu-content">
-                    <a href="#">Location 1</a>
-                    <a href="#">Location 2</a>
+                    <a href="#">Iloilo City</a>
                     <!-- Add more locations as needed -->
                 </div>
             </div>
@@ -479,8 +515,155 @@
       </div>
     </div>
   </nav>
+
+
+  
+<div class="home-bg">
+
+<section class="home">
+
+   <div class="swiper home-slider">
+   
+   <div class="swiper-wrapper">
+   <?php
+      $select_products = $conn->prepare("SELECT * FROM `products` LIMIT 6"); 
+     $select_products->execute();
+     if ($select_products->execute()) {
+      $result = $select_products->get_result();
+      if ($result->num_rows > 0) {
+          while ($fetch_products = $result->fetch_assoc()) { 
+          ?>
+ 
+      <div class="swiper-slide slide">
+         <div class="image">
+         <img src="../../pages/uploaded_img/<?= $fetch_products['productImage']; ?>" alt="">
+         </div>
+       <!-- <div class="content">
+            <span>upto 50% off</span>
+            <h3>latest headsets</h3>
+            <a href="shop.php" class="btn">shop now</a>
+         </div> -->
+      </div>
+
+     
+     
+      <?php
+      }
+   } }
+   ?>
+
+   </div>
+
+      <div class="swiper-pagination"></div>
+
+   </div>
+
+</section>
+
+</div>
+
+<section class="category">
+
+   <h1 class="heading">Top Products</h1>
+
+   <div class="swiper category-slider">
+
+   <div class="swiper-wrapper">
+   <?php
+      $select_products = $conn->prepare("SELECT * FROM `products` LIMIT 6"); 
+     $select_products->execute();
+     if ($select_products->execute()) {
+      $result = $select_products->get_result();
+      if ($result->num_rows > 0) {
+          while ($fetch_products = $result->fetch_assoc()) { 
+          ?>
+ 
+
+   <a href="../comment_2.php?id=<?= $fetch_products['product_id'] ?>" class="swiper-slide slide">
+      <img src="../../pages/uploaded_img/<?= $fetch_products['productImage']; ?>" alt="">
+      <h3><?= $fetch_products['productName']; ?></h3>
+   </a>
+
+   <?php
+      }
+   } }
+   ?>
+ 
+   </div>
+ 
+   <div class="swiper-pagination"></div>
+
+   </div>
+
+</section>
+
+
+
+
+
 </div>
   
+
+
+
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+
+
+<script>
+
+var swiper = new Swiper(".home-slider", {
+   loop:true,
+   spaceBetween: 20,
+   pagination: {
+      el: ".swiper-pagination",
+      clickable:true,
+    },
+});
+
+ var swiper = new Swiper(".category-slider", {
+   loop:true,
+   spaceBetween: 20,
+   pagination: {
+      el: ".swiper-pagination",
+      clickable:true,
+   },
+   breakpoints: {
+      0: {
+         slidesPerView: 2,
+       },
+      650: {
+        slidesPerView: 3,
+      },
+      768: {
+        slidesPerView: 4,
+      },
+      1024: {
+        slidesPerView: 5,
+      },
+   },
+});
+
+var swiper = new Swiper(".products-slider", {
+   loop:true,
+   spaceBetween: 20,
+   pagination: {
+      el: ".swiper-pagination",
+      clickable:true,
+   },
+   breakpoints: {
+      550: {
+        slidesPerView: 2,
+      },
+      768: {
+        slidesPerView: 2,
+      },
+      1024: {
+        slidesPerView: 3,
+      },
+   },
+});
+
+</script>
 <script src="../../js/script.js"></script>
 <script>
     function toggleDropdown() {

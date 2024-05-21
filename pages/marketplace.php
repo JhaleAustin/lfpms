@@ -126,42 +126,65 @@
             <div id="districtDropdown" class="dropdown-content">
                 <a href="javascript:void(0)" onclick="toggleSubmenu('district1')">District 1</a>
                 <div id="district1" class="submenu-content">
-                    <a href="marketplace.php?location=Guimbal">Guimbal</a>
-                    <a href="marketplace.php?location=Igbaras">Igbaras</a>
-                    <a href="marketplace.php?location=Miagao">Miagao</a>
-                    <a href="marketplace.php?location=Oton">Oton</a>
-                    <a href="marketplace.php?location=San Joaquin">San Joaquin</a>
-                    <a href="marketplace.php?location=Tigbauan">Tigbauan</a>
-                    <a href="marketplace.php?location=Tubungan">Tubungan</a>
+                    <a href="marketplace.php?location=Guimbal">Oton</a>
+                    <a href="marketplace.php?location=Igbaras">Tigbauan</a>
+                    <a href="marketplace.php?location=Miagao">Guimbal</a>
+                    <a href="marketplace.php?location=Oton">Tubungan</a>
+                    <a href="marketplace.php?location=San Joaquin">Igbaras</a>
+                    <a href="marketplace.php?location=Tigbauan">Miagao</a>
+                    <a href="marketplace.php?location=Tubungan">San Joaquin</a>
                 </div>
                 <a href="javascript:void(0)" onclick="toggleSubmenu('district2')">District 2</a>
                 <div id="district2" class="submenu-content">
-                    <a href="#">Location 1</a>
-                    <a href="#">Location 2</a>
-                    <!-- Add more locations as needed -->
+                    <a href="#">Alimodian</a>
+                    <a href="#">Pavia</a>
+                    <a href="#">Leganes</a>
+                    <a href="#">Zarraga</a>
+                    <a href="#">Leon</a>
+                    <a href="#">Sta. Barbara</a>
+                    <a href="#">New Lucena</a>
+                    <a href="#">New Lucena</a>
                 </div>
                 <a href="javascript:void(0)" onclick="toggleSubmenu('district3')">District 3</a>
                 <div id="district3" class="submenu-content">
-                    <a href="#">Location 1</a>
-                    <a href="#">Location 2</a>
-                    <!-- Add more locations as needed -->
+                    <a href="#">Cabatuan</a>
+                    <a href="#">Pototan</a>
+                    <a href="#">Maasin</a>
+                    <a href="#">Lambunao</a>
+                    <a href="#">Calinog</a>
+                    <a href="#">Badiangan</a>
+                    <a href="#">Bingawan</a>
+                    <a href="#">Mina</a>
+                    <a href="#">Janiuay</a>
                 </div>
                 <a href="javascript:void(0)" onclick="toggleSubmenu('district4')">District 4</a>
                 <div id="district4" class="submenu-content">
-                    <a href="#">Location 1</a>
-                    <a href="#">Location 2</a>
+                    <a href="#">Passi City</a>
+                    <a href="#">Dingle</a>
+                    <a href="#">Banate</a>
+                    <a href="#">Anilao</a>
+                    <a href="#">Barotac Nuevo</a>
+                    <a href="#">Dumangas</a>
+                    <a href="#">Dueñas</a>
                     <!-- Add more locations as needed -->
                 </div>
                 <a href="javascript:void(0)" onclick="toggleSubmenu('district5')">District 5</a>
                 <div id="district5" class="submenu-content">
-                    <a href="#">Location 1</a>
-                    <a href="#">Location 2</a>
-                    <!-- Add more locations as needed -->
+                    <a href="#">Estancia</a>
+                    <a href="#">Barotac Viejo</a>
+                    <a href="#">Ajuy</a>
+                    <a href="#">Concepcion</a>
+                    <a href="#">Sara</a>
+                    <a href="#">San Dionisio</a>
+                    <a href="#">Balasan </a>
+                    <a href="#">Batad</a>
+                    <a href="#">Carles</a>
+                    <a href="#">Lemery </a>
+                    <a href="#">San Rafael</a>
                 </div>
-                <a href="javascript:void(0)" onclick="toggleSubmenu('district6')">District 6</a>
+                <a href="javascript:void(0)" onclick="toggleSubmenu('district6')">Lone District</a>
                 <div id="district6" class="submenu-content">
-                    <a href="#">Location 1</a>
-                    <a href="#">Location 2</a>
+                    <a href="#">Iloilo City</a>
                     <!-- Add more locations as needed -->
                 </div>
             </div>
@@ -235,40 +258,58 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 </div>
-
-
 <?php
-$select_products = $conn->prepare("SELECT * FROM `users` where district = ?");
-$select_products->bind_param("s", $store);
-if ($select_products->execute()) {
-    $result = $select_products->get_result();
-    if ($result->num_rows > 0) {
-        while ($fetch_products = $result->fetch_assoc()) { 
+// Make sure the $store variable is properly set
+ 
+if ($store) {
+    // Prepare the statement to select users based on the district
+    $select_products = $conn->prepare("SELECT * FROM `users` WHERE district = ?");
+    $select_products->bind_param("s", $store);
+
+    // Execute the statement
+    if ($select_products->execute()) {
+        $result = $select_products->get_result();
+
+        // Check if any rows are returned
+        if ($result->num_rows > 0) {
+            while ($fetch_products = $result->fetch_assoc()) { 
 ?>
-
-
 <div class="container">
-  
     <div class="imgBx">
         <img src="../pages/uploaded_img/mango.png" alt="Nike Jordan Proto-Lyte Image">
     </div>
     <div class="details">
         <div class="content">
-            <h2><?= $fetch_products['fullname']; ?><br>
+            <h2><?= htmlspecialchars($fetch_products['fullname']); ?><br>
                 <!-- <span>Running Collection</span> -->
             </h2>
-            <p>Literary texts are texts that use language creatively to express ideas, emotions, and stories123.Some types of literary texts and examples are123:
-Lyrical texts: poems that express emotions and feelings, such as "An Idle Fellow" by Kate Chopin.
-Narrative texts: stories that tell events and actions, such as fairy tales, mysteries, science fiction, etc. For example, "An Imperial Message" by Franz Kafka.
-Theatrical or dramatic texts: texts that are written for performance, such as plays, scripts, dialogues, etc.
-Didactic or essay texts: texts that aim to inform, persuade, or teach, such as articles, reports, reviews, etc.</p>   
-             
+            <p>Literary texts are texts that use language creatively to express ideas, emotions, and stories. Some types of literary texts and examples are:
+                Lyrical texts: poems that express emotions and feelings, such as "An Idle Fellow" by Kate Chopin.
+                Narrative texts: stories that tell events and actions, such as fairy tales, mysteries, science fiction, etc. For example, "An Imperial Message" by Franz Kafka.
+                Theatrical or dramatic texts: texts that are written for performance, such as plays, scripts, dialogues, etc.
+                Didactic or essay texts: texts that aim to inform, persuade, or teach, such as articles, reports, reviews, etc.
+            </p>
         </div>
     </div>
 </div>
-        <?php
-        }}}
-   ?>
+<?php
+            }
+        } else {
+            // No users found in the specified district
+            echo "<p>No users found in this district.</p>";
+        }
+    } else {
+        echo "<p>Error executing query: " . htmlspecialchars($select_products->error) . "</p>";
+    }
+
+    // Close the statement
+    $select_products->close();
+} else {
+    // Handle case where $store is not set or empty
+   
+}
+?>
+
 <?php
 
 //$select_products = $conn->prepare("SELECT * FROM `products` where district=".$_GET['Guimbal']);
@@ -353,7 +394,7 @@ if ($select_products->execute()) {
 ?>
 
 
-<a href="./foods.php?id=<?= $fetch_products['product_id'] ?>">  
+<a href="./comment.php?id=<?= $fetch_products['product_id'] ?>">  
      
      <div class="container">
         <div class="imgBx">

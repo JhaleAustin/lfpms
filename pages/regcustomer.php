@@ -5,7 +5,7 @@
     {
         $email = $_POST['email'];
         $fullname = $_POST['fullName'];
-        $username = $_POST['userName'];
+        $username = $_POST['username'];
         $phone = $_POST['phone'];
         $pass = $_POST['password'];
     }

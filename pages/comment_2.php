@@ -1,19 +1,85 @@
 <?php
     session_start();
 
-    if(isset($_SESSION['id']) && $_SESSION['usertype'] == 1 || isset($_SESSION['id']) && $_SESSION['usertype'] == 2){
+    if(isset($_SESSION['id']) && $_SESSION['usertype'] == 1 ){
+
+        
+    include "../includes/dbcon.php";
+
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/about.css">
-    <title>About Us</title>
+    <link rel="stylesheet" href="../css/marketplace.css">
+    <link rel="stylesheet" href="../css/marketplace2.css">
+    <title>Marketplace</title>
+      <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<style>
 
-    <style>
-    
-    .dropdown {
+.container4 {
+    position: relative;
+    width: 1100px;
+    display: flex;
+    align-items: row-reverse;
+    flex-wrap: wrap;
+    padding: 10;
+   margin: 4% auto 0; }
+
+
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown button */
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+.dropdown {
             position: relative;
             display: inline-block;
         }
@@ -45,8 +111,7 @@
         .dropdown-submenu {
             position: relative;
         }
-
-        </style>
+</style>
 </head>
 <body>
 
@@ -56,7 +121,7 @@
         <ul>
             <li><a href="home/">Home</a></li>
             <li><a href="about.php">About</a></li>
-              <li class="dropdown">
+            <li class="dropdown">
             <a href="javascript:void(0)" class="dropbtn" onclick="toggleDropdown()">Districts</a>
             <div id="districtDropdown" class="dropdown-content">
                 <a href="javascript:void(0)" onclick="toggleSubmenu('district1')">District 1</a>
@@ -125,18 +190,18 @@
             </div>
         </li>
         <li><a href="marketplace.php">Products</a></li>
-             <li><a href="contact.php">Contact Us</a></li>
-          </ul>
+            <li><a href="contact.php">Contact Us</a></li>
+        </ul>
         <img src="../img/profile.png" class="user" id="userIcon">
         <div class="sub-menu-warp" id="subMenu">
-        <div class="sub-menu">
-              <div class="user-info">
-                     <a href="profile.php"> <img src="../img/profile.png">
+            <div class="sub-menu">
+                <div class="user-info">
+                    <img src="../img/profile.png">
                     <h2><?php echo $_SESSION['fullname']; ?></h2>
-                </a></div>
+                </div>
                 <hr>
         <a href="../Dashboard.php" class="sub-menu-link">Dashboard</a>
-      <hr>
+        <hr>
                 <a href="logout.php" class="sub-menu-link">
                     <img src="../img/profile.png">
                     <p>Log out</p>
@@ -145,11 +210,73 @@
         </div>
     </nav>
 
+
+<!-- Container with cards -->
+</br>
+</br>
+
+
+ 
+ 
+ 
+ 
+<?php
+ 
+    $user_id = $_GET['id'];
+    $select_products = $conn->prepare("
+    SELECT bi.* , p.*
+    FROM products p
+    JOIN users u ON p.msme_id = u.userid
+    JOIN business_information bi ON u.userid = bi.userid
+    WHERE p.product_id = ?");
+    $select_products->bind_param("i", $user_id); // Assuming user_id is an integer
+
+ 
+ if ($select_products->execute()) {
+    $result = $select_products->get_result();
+    if ($result->num_rows > 0) {
+        while ($fetch_products = $result->fetch_assoc()) { 
+?>
+
+
+<a href="./comment.php?id=<?= $fetch_products['product_id'] ?>">  
      
+     <div class="container">
+        <div class="imgBx">
+             <img src="../pages/uploaded_img/<?= $fetch_products['productImage'];?>" alt="Nike Jordan Proto-Lyte Image">
+         </div>
+         <div class="details">
+             <div class="content">
+             <h2><?= $fetch_products['productName']; ?><br>
+              
+                 <h4>MSME : <?= $fetch_products['NBusiness']; ?><br>
+                     <!-- <span>Running Collection</span> -->
+                 </h4>
+                 <h4>ADDRESS : <?= $fetch_products['BusinessAddress']; ?><br>
+                     <!-- <span>Running Collection</span> -->
+                 </h4>
+                 <p>
+                 <?= $fetch_products['productDetails']; ?></p>   
+                  <button>Comment</button>
+             </div>
+         </div>
+        
+     </div>
+  </a> 
+
+
+  <?php
+
+        
+    
+ 
+        }}
+}
+?>
+</div>
 
 
 </div>
-
 <script src="../js/script.js"></script>
 <script>
     function toggleDropdown() {
@@ -162,73 +289,14 @@
         submenu.classList.toggle("show");
     }
 </script>
-
 </body>
 </html>
 <?php
     }
-    else{
-       ?>
-       
-       
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/home.css">
-    <title>Foodtrack Home</title>
-
-    <style>
-        .hero2 {
-            width: 100%;
-            min-height: 100vh;
-            background: url('../img/about.png') center center no-repeat;
-            background-size:cover;
-            color: #525252;
-
-        }
- 
-    ul {
-        list-style-type: none;
-        padding: 0;
+    else if(isset($_SESSION['id']) && $_SESSION['usertype'] == 2){
+        header("Location: ./products2.php");
+    }else{
+        session_destroy();
+        header("Location: home/");
     }
-    li {
-        margin-bottom: 10px;
-    }
-    li a {
-        text-decoration: none;
-        color: #000000; /* Black text */
-        font-weight: bold;
-    }
-    </style>
-</head>
-<body>
-  
-<div class="hero2">
-  <nav>
-    <img src="../img/foodtrack.png" class="Foodtrack">
-    <ul>
-	<li><a href="../">Home</a></li>
-      <li><a href="about.php">About</a></li>
-      <li><a href="contact.php">Contact Us</a></li>
-     <li><a href="../login.php"  >Login</a></li>
-  
-    </ul>
-	  
- 
-      
-  </nav>
-</div>
-  
-<script src="../../js/script.js"></script>
-</body>
-</html>
-
-
-
-
-
-<?php
-    }
-?>
+?> 
