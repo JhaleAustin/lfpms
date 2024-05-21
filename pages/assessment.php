@@ -24,14 +24,14 @@
         <img src="../img/foodtrack.png" class="Foodtrack">
         <ul>
             <li><a href="./">Home</a></li>
-            <li><a href="pages/about.php">About</a></li>
-            <li><a href="pages/contact.php">Contact Us</a></li>
+            <li><a href="about.php">About</a></li>
+            <li><a href="contact.php">Contact Us</a></li>
             <li><a href="login.php">Login</a></li>
         </ul>
     </nav>
     <div class="c1">
         <div class="container" id="container">
-            <form method="POST" action="regmsme.php" onsubmit="return validateForm()" enctype="multipart/form-data">
+            <form method="POST" action="consultancyQuestionaire.php" onsubmit="return validateForm()" enctype="multipart/form-data">
                 <h1>Consultancy Questionaire</h1>
                 <!-- Profile Information Section -->
                 <!-- <div id="profileSection" class="section active"> -->

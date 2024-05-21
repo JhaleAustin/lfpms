@@ -157,7 +157,8 @@ if (isset($_SESSION['id']) && ($_SESSION['usertype'] == 1 || $_SESSION['usertype
                         </div>
                         <hr>
                         <a href="../Dashboard.php" class="sub-menu-link">Dashboard</a>
-                        <hr>
+                        <a href="../assessment.php" class="sub-menu-link">Assessment</a>
+     <hr>
                         <a href="logout.php" class="sub-menu-link">
                             <img src="../img/profile.png">
                             <p>Log out</p>

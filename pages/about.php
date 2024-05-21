@@ -136,7 +136,7 @@
                 </a></div>
                 <hr>
         <a href="../Dashboard.php" class="sub-menu-link">Dashboard</a>
-        <a href="../Dashboard.php" class="sub-menu-link">Assessment</a>
+        <a href="assessment.php" class="sub-menu-link">Assessment</a>
       <hr>
                 <a href="logout.php" class="sub-menu-link">
                     <img src="../img/profile.png">
