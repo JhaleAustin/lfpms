@@ -1,10 +1,4 @@
-<?php
-session_start();
-if (isset($_SESSION['id'])) {
-    header("Location: pages/home/");
-} else {
-    session_destroy();
-?>
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,44 +32,43 @@ if (isset($_SESSION['id'])) {
     <div class="c1">
         <div class="container" id="container">
             <form method="POST" action="regmsme.php" onsubmit="return validateForm()" enctype="multipart/form-data">
-                <img src="../img/foodtrack.png" class="Foodtrack">
-                <h1>LFPMS Sign up</h1>
+                <h1>Consultancy Questionaire</h1>
                 <!-- Profile Information Section -->
                 <!-- <div id="profileSection" class="section active"> -->
-                    <span>Create account for MSMEs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Personal Information</span>
-                    <input type="email" name="email" id="email" placeholder="Email" required />
-                    <input type="text" name="fullname" id="fullname" placeholder="Fullname" required />
-                    <input type="text" name="username" id="username" placeholder="Username" required />
-                    <input type="password" name="password" id="password" placeholder="Password" required />
-                    <button type="button" class="toggle-button" onclick="togglePasswordVisibility('password')">👁️</button>
-                    <input type="password" name="passwordCheck" id="passwordCheck" placeholder="Repeat Password" required />
-                    <button type="button" class="toggle-button2" onclick="togglePasswordVisibility('passwordCheck')">👁️</button>
+                    <input type="text" name="name" id="name" placeholder="Name" required />
+                    <input type="text" name="address" id="address" placeholder="Address" required />
+                    <h6>Please provide the following information.</h6>
+                <input type="text" name="municipality" id="municipality" placeholder="Municipality" required />
+                    <input type="text" name="phoneNumber" id="phoneNumber" placeholder="Phone Number" required />
+                    <input type="text" name="labelingformat" id="labelingformat" placeholder="Labeling Format: (stick on label, header, etc)
+" required />
+                    <input type="text" name="brandName" id="brandName" placeholder="Brand Name: (ex. Coca-cola, Milo, Mt.Dew)
+" required />
                     <!-- <button type="button" onclick="nextSection('businessSection')">Next</button>
                 </div> -->
                 <!-- Business Information Section -->
                 <!-- <div id="businessSection" class="section"> -->
-                    <span>Create account for MSMEs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Business Information</span>
-                    <input type="text" name="nameofbusiness" id="nameofbusiness" placeholder="Name of Business" required />
-                    <input type="text" name="businessAddress" id="businessAddress" placeholder="Business Address" required />
-                    <input type="text" name="typeofbusiness" id="typeofbusiness" placeholder="Type of Business" required />
-                    <input type="text" name="bnr" id="bnr" placeholder="Business Registration Number" required />
-                    <input type="text" name="tin" id="tin" placeholder="Tax Identification Number" required />
+                   <h6>Product Identity Name: True Name/Nature of the Food (ex. salted Peanut, Dried Mango)</h6> 
+                   <input type="text" name="productIdentity" id="productIdentity"  required />
+                    <h6>If 1 label with 2 or more product selection:
+Name of Product </h6>
+                   <input type="text" name="label1" id="label1"  required />
+                    <input type="text" name="label2" id="label2"  required />
+                    <input type="text" name="label3" id="label3"  required />
+                    <input type="text" name="label4" id="label4"required />
+
+                    
+                    <input type="text" name="tagline" id="tagline" placeholder="Tagline (optional) " required />
+                    <input type="text" name="netContent" id="netContent" placeholder="Net. Content (kg, g, ml,etc.): " required />
                     <!-- <button type="button" onclick="nextSection('verificationSection')">Next</button>
                 </div> -->
                 <!-- Verification Information Section -->
                 <!-- <div id="verificationSection" class="section"> -->
-                    <h6 class="mb-0">Business License</h6>
-                    <input type="file" name="bl" accept=".pdf,.doc,.docx" />
-                    <h6 class="mb-0">Tax Documents</h6>
-                    <input type="file" name="td" accept=".pdf,.doc,.docx" />
-                    <h6 class="mb-0">Business Permit</h6>
-                    <input type="file" name="bp" accept=".pdf,.doc,.docx" />
-                    <div class="input-container">
-                        <label>
-                            <input type="checkbox" id="termsCheckbox" required>
-                            By clicking Register, I agree to the <a href="terms.php" target="_blank">Terms and Conditions</a>.
-                        </label>
-                    </div>
+                    <h6 class="mb-0">Ingredients (from most to least quantity):</h6>
+                    <textarea name="ingredients"></textarea>
+                    <h6 class="mb-0">Expiry Date of the Product</h6>
+                    <textarea name="expiryDate"></textarea>
+                    <br><br>                
                     <button type="submit" name="submit" id="submit">Create Account</button>
                 <!-- </div> -->
             </form>
@@ -115,6 +108,4 @@ if (isset($_SESSION['id'])) {
     </script>
 </body>
 </html>
-<?php
-}
-?>
+
